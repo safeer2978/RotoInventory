@@ -1,0 +1,12 @@
+*************
+ROTOINVENTORY
+*************
+Release notes 10/12/18
+********************************************************************************************
+RotoInventory is an application built to manage inventory of the Robotics group of Rotonity.
+This application uses a BARCODE scanner which scans the inventory and makes it easier to keep track the circulation of items within group members
+It uses an online Free Hosted MySQL server consisting of Inventory and Member data which is accessed by a PHP API 
+the API is also hosted over a free web hosting server.
+Aplication uses ZXING library for scanning barCodes, Async tasks to connect to API.
+
+For more information about the application please refer the PDF in the repository
