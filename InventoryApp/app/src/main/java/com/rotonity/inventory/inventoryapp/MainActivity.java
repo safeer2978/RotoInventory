@@ -35,13 +35,24 @@ public class MainActivity extends AppCompatActivity implements fragment_ViewInve
     InventoryItem[] inventoryItem= new InventoryItem[100];
     static ArrayList<String> part_type_list,members_list;
     static SharedPreferences sp;
+    String webhash="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue( getHashRequest );
         setContentView(R.layout.activity_main);
         loadFragment(new TabsFragment());
+        sp = getSharedPreferences("login",MODE_PRIVATE);
+        sp = getSharedPreferences("Hash",MODE_PRIVATE);
+        sp=getSharedPreferences("localHash",MODE_PRIVATE);
+        webhash=sp.getString("localHash","");
 
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(getDataRequest);
+
+        String hash=sp.getString("Hash",webhash);
+        if(!(hash.equals(webhash))) {
+            VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(getDataRequest);
+           // sp.edit().putString(webhash,"Hash").apply();
+        }
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(getTableDataRequest);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -69,7 +80,9 @@ public class MainActivity extends AppCompatActivity implements fragment_ViewInve
                         break;
 
                     case R.id.navigation_scan:
-                        fragment = new Scanner();
+                      //  fragment = new Scanner();
+                        startActivity(new Intent(MainActivity.this, Scanner.class));
+                        onPause();
                         break;
                 }
                 return loadFragment(fragment);
@@ -90,13 +103,33 @@ public class MainActivity extends AppCompatActivity implements fragment_ViewInve
 
 
 
+    public StringRequest getHashRequest = new StringRequest(Request.Method.POST, URLs.GET_HASH,
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                       // webhash=response;
+                    sp.edit().putString(response,"Hash").apply();
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //  Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }) {
+        @Override
+        protected Map<String, String> getParams() {
+            Map<String, String> params = new HashMap<>();
+            return params;
+        }
+    };
+
     public StringRequest getDataRequest = new StringRequest(Request.Method.POST, URLs.GET_ALL,
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
                     try {
-
                         JSONArray jsonarray = new JSONArray(response);
                         for (int i = 0; i < jsonarray.length(); i++) {
                             JSONObject jsonobject = jsonarray.getJSONObject(i);
@@ -171,14 +204,19 @@ public class MainActivity extends AppCompatActivity implements fragment_ViewInve
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==R.id.log_out){
+            sp.edit().putBoolean("logged",false).apply();
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            finish();
+        }
 
-        if (id == R.id.nav_manage) {
+        /*if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
-        }
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

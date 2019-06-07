@@ -74,6 +74,7 @@
                     android:layout_gravity="center"
                     android:text="88878"
                     android:layout_weight="1"
+                    android:textColor="@color/colorAccent"
                     android:visibility="invisible" />
 
 
