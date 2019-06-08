@@ -20,6 +20,10 @@
                 android:id="@+id/log_out"
 
                 android:title="Log Out" />
+            <item
+                android:id="@+id/yo"
+
+                android:title="yo?" />
         </menu>
     </item>
 

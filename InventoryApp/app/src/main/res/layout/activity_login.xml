@@ -14,16 +14,6 @@
 
 
     <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/button2"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="318dp"
-        android:visibility="gone" />
 
     <Button
         android:id="@+id/button2"
@@ -194,4 +184,19 @@
             android:textColor="@color/TextOnDark" />
 
     </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="243dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="258dp"
+        android:visibility="gone" />
 </RelativeLayout>
