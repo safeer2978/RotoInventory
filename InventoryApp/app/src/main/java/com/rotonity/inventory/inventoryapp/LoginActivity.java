@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -78,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         public void run()
         {
             try{
-            if(saved_values.getBoolean("logged",false) || sp.getBoolean("logged",false)) {
+            if(sp.getBoolean("logged",false)) {
                //TODO  Global.user=sp.getString("user_name","user");
                 User.username=sp.getString("user_name","user");
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -90,14 +89,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         }}
     };
-    SharedPreferences saved_values;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handler.postDelayed(spRunner,0);
-         saved_values= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
         setContentView(R.layout.activity_login);
         sp = getSharedPreferences("login",MODE_PRIVATE);
         sp = getSharedPreferences("user_name",MODE_PRIVATE);

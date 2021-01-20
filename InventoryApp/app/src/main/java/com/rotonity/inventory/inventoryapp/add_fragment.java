@@ -1,7 +1,6 @@
 package com.rotonity.inventory.inventoryapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +31,6 @@ import java.util.Map;
 
 
 public class add_fragment extends Fragment {
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -49,28 +45,12 @@ public class add_fragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-
-
-    @Override
-    public void onResume() {
-        try{
-            add_barcode.setText(Scanner.barcode);
-        }catch(NullPointerException e)
-        {add_barcode.setText("");}
-        super.onResume();
-    }
 
     public     EditText Title_et, decription_et, cost_et, purchased_by_et;
     Spinner currently_with_sp, part_type_sp;
     TextView add_barcode;
     CheckBox available_cb;
     Button save;
-    ImageButton scan;
     String user = "safeer";//TODO make user as shared prefeance
 
     @Override
@@ -96,8 +76,6 @@ public class add_fragment extends Fragment {
         part_type_sp = view.findViewById(R.id.add_part_type);
         available_cb = view.findViewById(R.id.add_available);
         save=view.findViewById(R.id.add_button);
-        scan=view.findViewById(R.id.imageButton);
-
         return view;
     }
 
@@ -105,18 +83,6 @@ public class add_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        scan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle b= new Bundle();
-                b.putString("type","Add");
-                Intent intent=new Intent(getActivity(),Scanner.class);
-                intent.putExtras(b);
-       startActivity(intent);
-       onPause();
-            }
-        });
     save.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {

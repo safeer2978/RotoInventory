@@ -5,25 +5,21 @@
 
     <group android:checkableBehavior="single">
 
-        <!--<item
+        <item
             android:id="@+id/nav_manage"
-            android:title="Tools" />-->
+            android:title="Tools" />
     </group>
 
-    <item android:title="Account">
+    <item android:title="Communicate">
         <menu>
-            <!--<item
+            <item
                 android:id="@+id/nav_share"
 
-                android:title="Share" />-->
+                android:title="Share" />
             <item
-                android:id="@+id/log_out"
+                android:id="@+id/nav_send"
 
-                android:title="Log Out" />
-            <item
-                android:id="@+id/yo"
-
-                android:title="yo?" />
+                android:title="Send" />
         </menu>
     </item>
 

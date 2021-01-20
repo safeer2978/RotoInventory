@@ -19,7 +19,6 @@ public class ViewPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_view_page);
         recyclerView=findViewById(R.id.recycle_viewpage);
         item_name=findViewById(R.id.item_name);

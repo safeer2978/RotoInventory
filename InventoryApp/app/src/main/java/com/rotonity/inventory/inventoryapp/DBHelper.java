@@ -76,9 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return id;
     }
 
-
-
-    public  InventoryItem getItem(String barcode) {
+    public InventoryItem getItem(String barcode) {
         // get readable database as we are not inserting anything
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -94,12 +92,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if (cursor != null)
             cursor.moveToFirst();
-        InventoryItem item=new InventoryItem();
-        try {
-            item = new InventoryItem(cursor.getString(cursor.getColumnIndex(INVENTORY_COLUMN_ID)));//,
-        }catch (Exception e){
-                item.setDescription("");
-        }
+
+        InventoryItem item = new InventoryItem(cursor.getString(cursor.getColumnIndex(INVENTORY_COLUMN_ID)));//,
+                //TODO cursor.getString(cursor.getColumnIndex(INVENTORY_COLUMN_NAME)));
+
 
         // close the db connection
         cursor.close();
